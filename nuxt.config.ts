@@ -13,9 +13,4 @@ export default defineNuxtConfig({
   pinia: {
     autoImports: ["defineStore"],
   },
-
-  app: {
-    pageTransition: false,
-    layoutTransition: false,
-  },
 });
