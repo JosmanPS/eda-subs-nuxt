@@ -14,6 +14,7 @@ const customDarkTheme: ThemeDefinition = {
 
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
+    ssr: true,
     components: {
       ...components,
       ...dataTableComponents,
