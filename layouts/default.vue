@@ -19,7 +19,10 @@
               >{{ link.name }}</NuxtLink
             >
           </div>
-          <div>
+          <div v-if="user">
+            <UsersAvatarMenu :user="user" />
+          </div>
+          <div v-else>
               <NuxtLink
                 to="/login"
                 class="inline-block mt-0 text-slate-300 hover:text-red-500 mr-4"
@@ -44,8 +47,14 @@
 </template>
 
 <script setup lang="ts">
+import { useAuthStore } from "~/store/auth.store";
+
 const links = [
   { name: "Masterclass", url: "/masterclass" },
   { name: "Cursos", url: "/cursos" },
 ];
+
+const authStore = useAuthStore();
+
+const user = computed(() => authStore.user);
 </script>
