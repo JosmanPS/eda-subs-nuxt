@@ -32,5 +32,13 @@ export const useUsersStore = defineStore("users", {
         throw err?.response?.data?.message || "Error desconocido";
       }
     },
+
+    async deleteUser(userId: string) {
+      try {
+        await usersService.deleteUser(userId);
+      } catch (err: any) {
+        throw err?.response?.data?.message || "Error desconocido";
+      }
+    }
   },
 });

@@ -45,4 +45,11 @@ export class UsersService extends BaseAPI {
       authorization: `Bearer ${token}`,
     });
   }
+
+  async deleteUser(userId: string): Promise<void> {
+    const token = this.authService.getToken("access-token");
+    await this.delete(`/users/${userId}`, null, null, {
+      authorization: `Bearer ${token}`,
+    });
+  }
 }

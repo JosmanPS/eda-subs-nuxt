@@ -38,7 +38,7 @@
           </template>
           <template v-slot:item.actions="{ item }">
             <div>
-              <v-btn size="sm" icon
+              <v-btn size="sm" icon @click="() => deleteUser(item.raw.id)"
                 ><v-icon color="error">mdi-delete</v-icon></v-btn
               >
             </div>
@@ -56,6 +56,7 @@
 </template>
 
 <script setup lang="ts">
+import { useNotificationsStore } from "~/store/notifications.store";
 import { useUsersStore } from "~/store/users.store";
 
 definePageMeta({
@@ -88,4 +89,22 @@ onMounted(() => {
 const search = ref("");
 
 const showModal = ref(false);
+
+const notificationsStore = useNotificationsStore();
+
+async function deleteUser(userId: string) {
+  const conf = confirm(
+    "¿Estás seguro que deseas eliminar este usuario? Toda la información relacionada se perderá."
+  );
+
+  if (conf) {
+    try {
+      await usersStore.deleteUser(userId);
+      notificationsStore.showSuccessMessage("El usuario se ha eliminado");
+      await reloadUsers();
+    } catch (err) {
+      notificationsStore.showErrorMessage(`Error: ${String(err)}`);
+    }
+  }
+}
 </script>

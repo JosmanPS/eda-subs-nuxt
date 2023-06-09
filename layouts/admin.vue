@@ -35,6 +35,9 @@
       <slot></slot>
     </v-main>
 
+    <LayoutErrorSnackbar />
+    <LayoutSuccessSnackbar />
+
     <LayoutFooter />
   </v-app>
 </template>
