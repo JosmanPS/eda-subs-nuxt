@@ -3,6 +3,7 @@ import { CreateUserDTO } from "../dtos/create-user.dto";
 import { GetAllUsersResponseDTO } from "../dtos/get-all-users.dto";
 import { GetLoggedUserResponseDTO } from "../dtos/get-logged-user.dto";
 import { LoginDTO, LoginResponseDTO } from "../dtos/login.dto";
+import { UpdateUserDTO } from "../dtos/updata-user.dto";
 import { User } from "../entities/user.entity";
 
 export class UsersService extends BaseAPI {
@@ -42,6 +43,13 @@ export class UsersService extends BaseAPI {
   async createUser(dto: CreateUserDTO): Promise<void> {
     const token = this.authService.getToken("access-token");
     await this.post("/users", dto, null, {
+      authorization: `Bearer ${token}`,
+    });
+  }
+
+  async updateUser(userId: string, dto: UpdateUserDTO): Promise<void> {
+    const token = this.authService.getToken("access-token");
+    await this.put(`/users/${userId}`, dto, null, {
       authorization: `Bearer ${token}`,
     });
   }

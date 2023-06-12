@@ -38,6 +38,9 @@
           </template>
           <template v-slot:item.actions="{ item }">
             <div>
+              <v-btn size="sm" class="mr-2" icon @click="() => openUpdateModal(item.raw)"
+                ><v-icon color="info">mdi-pencil</v-icon></v-btn
+              >
               <v-btn size="sm" icon @click="() => deleteUser(item.raw.id)"
                 ><v-icon color="error">mdi-delete</v-icon></v-btn
               >
@@ -52,10 +55,19 @@
       @close="showModal = false"
       @success="reloadUsers"
     />
+
+    <UsersUpdateModal
+      v-if="userSelected"
+      :dialog="showUpdateModal"
+      :user="userSelected"
+      @close="showUpdateModal = false"
+      @success="reloadUsers"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
+import { User } from "~/lib/modules/users/entities/user.entity";
 import { useNotificationsStore } from "~/store/notifications.store";
 import { useUsersStore } from "~/store/users.store";
 
@@ -106,5 +118,13 @@ async function deleteUser(userId: string) {
       notificationsStore.showErrorMessage(`Error: ${String(err)}`);
     }
   }
+}
+
+const showUpdateModal = ref(false);
+const userSelected = ref<User | null>(null);
+
+function openUpdateModal(user: User) {
+  userSelected.value = user;
+  showUpdateModal.value = true;
 }
 </script>
