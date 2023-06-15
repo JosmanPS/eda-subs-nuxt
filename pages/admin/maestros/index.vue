@@ -30,6 +30,20 @@
           <template v-slot:item.avatar="{ item }">
             <TeachersAvatar :teacher="item.raw" />
           </template>
+          <template v-slot:item.actions="{ item }">
+            <div>
+              <v-btn
+                size="sm"
+                class="mr-2"
+                icon
+                @click="() => openUpdateModal(item.raw)"
+                ><v-icon color="info">mdi-pencil</v-icon></v-btn
+              >
+              <v-btn size="sm" icon @click="() => deleteTeacher(item.raw.id)"
+                ><v-icon color="error">mdi-delete</v-icon></v-btn
+              >
+            </div>
+          </template>
         </v-data-table>
       </v-card>
     </v-container>
@@ -44,6 +58,7 @@
 
 <script setup lang="ts">
 import { Teacher } from "~/lib/modules/courses/entities/teacher.entity";
+import { useNotificationsStore } from "~/store/notifications.store";
 import { useTeachersStore } from "~/store/teachers.store";
 
 definePageMeta({
@@ -52,6 +67,7 @@ definePageMeta({
 });
 
 const teachersStore = useTeachersStore();
+const notificationsStore = useNotificationsStore();
 
 const search = ref("");
 const showModal = ref(false);
@@ -73,4 +89,22 @@ function reloadTeachers() {
 onMounted(() => {
   teachersStore.getAllTeachers();
 });
+
+function openUpdateModal(teacher: Teacher) {}
+
+async function deleteTeacher(teacherId: string) {
+  const conf = confirm(
+    "¿Estás seguro que deseas eliminar este maestro? Toda la información relacionada se perderá."
+  );
+
+  if (conf) {
+    try {
+      await teachersStore.deleteTeacher(teacherId);
+      notificationsStore.showSuccessMessage("El usuario se ha eliminado");
+      await reloadTeachers();
+    } catch (err) {
+      notificationsStore.showErrorMessage(`Error: ${String(err)}`);
+    }
+  }
+}
 </script>

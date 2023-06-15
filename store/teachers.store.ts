@@ -3,7 +3,7 @@ import { Teacher } from "~/lib/modules/courses/entities/teacher.entity";
 import { teachersService } from "~/lib/modules/courses/services";
 
 interface TeachersStoreState {
-  teachers: Teacher[]
+  teachers: Teacher[];
 }
 
 export const useTeachersStore = defineStore("teachers", {
@@ -33,6 +33,14 @@ export const useTeachersStore = defineStore("teachers", {
       } catch (err: any) {
         throw err?.response?.data?.message || "Error desconocido";
       }
-    }
-  }
-})
+    },
+
+    async deleteTeacher(teacherId: string) {
+      try {
+        await teachersService.deleteTeacher(teacherId);
+      } catch (err: any) {
+        throw err?.response?.data?.message || "Error desconocido";
+      }
+    },
+  },
+});

@@ -36,4 +36,11 @@ export class TeachersService extends BaseAPI {
       authorization: `Bearer ${token}`,
     });
   }
+
+  async deleteTeacher(teacherId: string): Promise<void> {
+    const token = this.authService.getToken("access-token");
+    await this.delete(`/teachers/${teacherId}`, null, null, {
+      authorization: `Bearer ${token}`,
+    });
+  }
 }
