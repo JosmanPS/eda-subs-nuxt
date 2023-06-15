@@ -5,7 +5,7 @@
         <div class="mb-6 md:mb-0">
           <NuxtLink to="/" class="flex items-center">
             <v-img
-              src="eda.svg"
+              src="/eda.svg"
               width="150"
               alt="Escuela de Avivamiento"
             ></v-img>
