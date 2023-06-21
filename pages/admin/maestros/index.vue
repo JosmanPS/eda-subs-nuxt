@@ -53,6 +53,14 @@
       @close="showModal = false"
       @success="reloadTeachers"
     />
+
+    <TeachersUpdateModal
+      v-if="updateSelectedTeacher"
+      :dialog="showUpdateModal"
+      :teacher="updateSelectedTeacher"
+      @close="showUpdateModal = false"
+      @success="reloadTeachers"
+    />
   </div>
 </template>
 
@@ -90,7 +98,13 @@ onMounted(() => {
   teachersStore.getAllTeachers();
 });
 
-function openUpdateModal(teacher: Teacher) {}
+const showUpdateModal = ref(false);
+const updateSelectedTeacher = ref<Teacher | null>(null);
+
+function openUpdateModal(teacher: Teacher) {
+  updateSelectedTeacher.value = teacher;
+  showUpdateModal.value = true;
+}
 
 async function deleteTeacher(teacherId: string) {
   const conf = confirm(

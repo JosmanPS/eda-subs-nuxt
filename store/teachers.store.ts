@@ -1,4 +1,5 @@
 import { CreateTeacherDTO } from "~/lib/modules/courses/dtos/create-teacher.dto";
+import { UpdateTeacherDTO } from "~/lib/modules/courses/dtos/update-teacher.dto";
 import { Teacher } from "~/lib/modules/courses/entities/teacher.entity";
 import { teachersService } from "~/lib/modules/courses/services";
 
@@ -30,6 +31,14 @@ export const useTeachersStore = defineStore("teachers", {
     async createTeacher(dto: CreateTeacherDTO) {
       try {
         await teachersService.create(dto);
+      } catch (err: any) {
+        throw err?.response?.data?.message || "Error desconocido";
+      }
+    },
+
+    async updateTeacher(dto: UpdateTeacherDTO) {
+      try {
+        await teachersService.updateTeacher(dto);
       } catch (err: any) {
         throw err?.response?.data?.message || "Error desconocido";
       }

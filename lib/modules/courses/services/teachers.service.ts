@@ -1,6 +1,7 @@
 import { BaseAPI } from "../../shared/infra/services/base-api.service";
 import { CreateTeacherDTO } from "../dtos/create-teacher.dto";
 import { GetAllTeachersResponseDTO } from "../dtos/get-all-teachers.dto";
+import { UpdateTeacherDTO } from "../dtos/update-teacher.dto";
 
 export class TeachersService extends BaseAPI {
   async getAll(): Promise<GetAllTeachersResponseDTO> {
@@ -40,6 +41,14 @@ export class TeachersService extends BaseAPI {
   async deleteTeacher(teacherId: string): Promise<void> {
     const token = this.authService.getToken("access-token");
     await this.delete(`/teachers/${teacherId}`, null, null, {
+      authorization: `Bearer ${token}`,
+    });
+  }
+
+  async updateTeacher(dto: UpdateTeacherDTO): Promise<void> {
+    const { teacherId } = dto;
+    const token = this.authService.getToken("access-token");
+    await this.put(`/teachers/${teacherId}`, dto, null, {
       authorization: `Bearer ${token}`,
     });
   }
