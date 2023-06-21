@@ -48,7 +48,32 @@ export class TeachersService extends BaseAPI {
   async updateTeacher(dto: UpdateTeacherDTO): Promise<void> {
     const { teacherId } = dto;
     const token = this.authService.getToken("access-token");
-    await this.put(`/teachers/${teacherId}`, dto, null, {
+
+    const data = new FormData();
+
+    if (dto.name) {
+      data.append("name", dto.name);
+    }
+    if (dto.lastName) {
+      data.append("lastName", dto.lastName);
+    }
+    if (dto.email) {
+      data.append("email", dto.email);
+    }
+    if (dto.description) {
+      data.append("description", dto.description);
+    }
+    if (dto.links) {
+      data.append("links", JSON.stringify(dto.links));
+    }
+    if (dto.picture) {
+      data.append("picture", dto.picture);
+    }
+    if (dto.userId) {
+      data.append("userId", dto.userId);
+    }
+
+    await this.put(`/teachers/${teacherId}`, data, null, {
       authorization: `Bearer ${token}`,
     });
   }
