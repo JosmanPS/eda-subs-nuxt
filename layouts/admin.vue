@@ -55,6 +55,7 @@ const menuItems = [
   { icon: "mdi-view-dashboard", title: "Dashboard", to: "/dashboard" },
   { icon: "mdi-account", title: "Usuarios", to: "/admin/usuarios" },
   { icon: "mdi-human-male-board", title: "Maestros", to: "/admin/maestros" },
+  { icon: "mdi-video", title: "Masterclass", to: "/admin/masterclass" },
 ];
 
 function logoutAndRedirect() {
