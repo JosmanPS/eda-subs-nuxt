@@ -1,5 +1,6 @@
 import { CreateUserDTO } from "~/lib/modules/users/dtos/create-user.dto";
 import { UpdateUserDTO } from "~/lib/modules/users/dtos/updata-user.dto";
+import { RegisterDTO } from "~/lib/modules/users/dtos/register.dto";
 import { User } from "~/lib/modules/users/entities/user.entity";
 import { usersService } from "~/lib/modules/users/services";
 
@@ -28,7 +29,7 @@ export const useUsersStore = defineStore("users", {
 
     async createUser(dto: CreateUserDTO) {
       try {
-        await usersService.createUser(dto)
+        await usersService.createUser(dto);
       } catch (err: any) {
         throw err?.response?.data?.message || "Error desconocido";
       }
@@ -36,7 +37,7 @@ export const useUsersStore = defineStore("users", {
 
     async updateUser(userId: string, dto: UpdateUserDTO) {
       try {
-        await usersService.updateUser(userId, dto)
+        await usersService.updateUser(userId, dto);
       } catch (err: any) {
         throw err?.response?.data?.message || "Error desconocido";
       }
@@ -48,6 +49,14 @@ export const useUsersStore = defineStore("users", {
       } catch (err: any) {
         throw err?.response?.data?.message || "Error desconocido";
       }
-    }
+    },
+
+    async register(dto: RegisterDTO) {
+      try {
+        await usersService.register(dto);
+      } catch (err: any) {
+        throw err?.response?.data?.error?.message || "Error desconocido";
+      }
+    },
   },
 });

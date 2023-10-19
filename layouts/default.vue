@@ -42,6 +42,8 @@
     <v-main class="relative">
       <slot></slot>
     </v-main>
+    <LayoutErrorSnackbar />
+    <LayoutSuccessSnackbar />
     <LayoutFooter />
   </v-app>
 </template>

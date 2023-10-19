@@ -26,14 +26,14 @@ export const useAuthStore = defineStore("auth", {
         expDate.setDate(todayDate.getDate() + 5);
 
         const token = useCookie("token", { expires: expDate });
-        token.value = data.token;
-        authService.setToken("access-token", data.token);
+        token.value = data.jwt;
+        authService.setToken("access-token", data.jwt);
 
         this.setUser(data.user);
 
         return data.user;
       } catch (err: any) {
-        throw err?.response?.data?.message;
+        throw err?.response?.data?.error?.message;
       }
     },
 

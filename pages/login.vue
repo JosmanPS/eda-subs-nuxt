@@ -7,7 +7,7 @@
           <v-card-text>
             <v-form @submit.prevent="submit">
               <v-text-field
-                v-model="form.email"
+                v-model="form.identifier"
                 label="Email"
                 type="email"
                 prepend-icon="mdi-email"
@@ -61,7 +61,7 @@
 <script setup lang="ts">
 import { useAuthStore } from "~/store/auth.store";
 
-const form = ref({ email: "", password: "" });
+const form = ref({ identifier: "", password: "" });
 const error = ref('')
 const show = ref(false);
 

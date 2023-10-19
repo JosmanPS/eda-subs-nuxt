@@ -2,11 +2,11 @@ import { JWTToken } from "../../auth/entities/tokens.entity";
 import { User } from "../entities/user.entity";
 
 export interface LoginDTO {
-  email: string;
+  identifier: string;
   password: string;
 }
 
 export interface LoginResponseDTO {
-  token: JWTToken;
+  jwt: JWTToken;
   user: User;
 }
