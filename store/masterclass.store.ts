@@ -12,6 +12,17 @@ export const useMasterclassStore = defineStore("masterclass", {
   }),
 
   actions: {
+    async getAllMasterclassPreview(): Promise<MasterClass[]> {
+      try {
+        const response = await masterclassService.getAllPreview();
+        console.log("🚀 ~ file: masterclass.store.ts:18 ~ getAllMasterclassPreview ~ response:", response)
+        this.masterclass = response.masterclass;
+        return this.masterclass;
+      } catch (err: any) {
+        throw err || "Error desconocido";
+      }
+    },
+
     async getAllMasterclass(): Promise<MasterClass[]> {
       try {
         const response = await masterclassService.getAll();

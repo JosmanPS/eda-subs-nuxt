@@ -11,7 +11,9 @@ export interface Teacher {
   name: string;
   lastName: string;
   email: string;
-  picture: string;
+  picture: {
+    url: string;
+  };
   userId?: string;
   user?: User;
   description: string;

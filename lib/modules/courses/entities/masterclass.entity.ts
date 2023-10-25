@@ -1,4 +1,5 @@
 import { ContentBlock } from "./contentblock.entity";
+import { Tag } from "./tag.entity";
 import { Teacher } from "./teacher.entity";
 
 export interface MasterClass {
@@ -7,7 +8,10 @@ export interface MasterClass {
   slug: string;
   description: ContentBlock[];
   teacherId: string;
-  teachers?: Teacher;
-  image: string;
+  teacher: Teacher;
+  thumbnail: {
+    url: string
+  };
+  tags: Tag[]
   content: ContentBlock[];
 }

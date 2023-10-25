@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <v-avatar v-if="teacher.picture" :image="teacher.picture"></v-avatar>
+  <div class="flex flex-row align-middle">
+    <v-avatar v-if="teacher.picture" :image="teacher.picture.url"></v-avatar>
     <v-avatar v-else color="primary">
       <span class="text-h5">{{ initials }}</span>
     </v-avatar>
+    <div class="ml-2 flex flex-col justify-center">
+      <span><b>Instructor</b></span>
+      <span>{{ teacher.name }} {{ teacher.lastName }}</span>
+    </div>
   </div>
 </template>
 
