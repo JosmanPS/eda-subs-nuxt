@@ -24,6 +24,9 @@
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </div>
+      <v-list-item @click="logout">
+        <v-list-item-title>Cerrar sesión</v-list-item-title>
+      </v-list-item>
     </v-list>
   </v-menu>
 </template>
@@ -31,6 +34,7 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 import { User } from "~/lib/modules/users/entities/user.entity";
+import { useAuthStore } from "~/store/auth.store";
 
 const items = [{ title: "Dashboard", url: "/dashboard" }];
 const staffLinks = [{ title: "Admin", url: "/admin" }];
@@ -41,4 +45,11 @@ const props = defineProps({
     required: true,
   },
 });
+
+const authStore = useAuthStore()
+
+function logout() {
+  authStore.logout()
+  window.location.pathname = '/login'
+}
 </script>

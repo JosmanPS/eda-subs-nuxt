@@ -15,4 +15,5 @@ export interface MasterClass {
   };
   tags: Tag[]
   content: string;
+  freePreview: boolean
 }

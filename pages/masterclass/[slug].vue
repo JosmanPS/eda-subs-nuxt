@@ -1,35 +1,53 @@
 <template>
-  <section>
-    <div class="mx-auto z-20 w-full max-w-screen-xl py-12 px-4 lg:py-28">
-      <div v-if="!isAuth">
-        <v-alert type="error"
-          >Debes iniciar sesión para ver este contenido.</v-alert
-        >
-      </div>
-      <div v-if="error">
-        <v-alert type="error">{{ error }}</v-alert>
-      </div>
+  <div>
+    <div v-if="!isAuth">
+      <section>
+        <div class="mx-auto z-20 w-full max-w-screen-xl py-12 px-4 lg:py-28">
+          <v-alert type="error"
+            >Debes iniciar sesión para ver este contenido.</v-alert
+          >
+        </div>
+      </section>
+    </div>
+    <div v-else>
       <div v-if="masterclass">
-        <h1 class="text-white text-4xl mb-6 font-semibold">
-          {{ masterclass.title }}
-        </h1>
-        <div class="mb-8">
-          <TagsChip
-            v-for="tag in masterclass.tags"
-            :key="tag.slug"
-            :tag="tag"
-            class="mr-2"
-          />
-        </div>
-        <div class="mb-12">
-          <TeachersAvatar :teacher="masterclass.teacher" />
-        </div>
-        <p>{{ masterclass.description }}</p>
-        <hr class="my-12" />
-        <div v-html="content" class="prose lg:prose-xl prose-slate prose-invert mx-auto"></div>
+        <section class="bg-neutral-800 shadow">
+          <div class="mx-auto z-20 w-full max-w-screen-xl py-12 px-4 lg:py-28">
+            <v-breadcrumbs :items="breadcrumbsItems" />
+            <h1 class="text-white text-4xl mb-6 font-semibold">
+              {{ masterclass.title }}
+            </h1>
+            <div class="mb-8">
+              <TagsChip
+                v-for="tag in masterclass.tags"
+                :key="tag.slug"
+                :tag="tag"
+                class="mr-2"
+              />
+            </div>
+            <div class="">
+              <TeachersAvatar :teacher="masterclass.teacher" />
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="mx-auto z-20 w-full max-w-screen-xl py-12 px-4 lg:py-28">
+            <div
+              v-html="content"
+              class="prose lg:prose-xl prose-neutral prose-invert mx-auto"
+            ></div>
+          </div>
+        </section>
+      </div>
+      <div v-else>
+        <section>
+          <div class="mx-auto z-20 w-full max-w-screen-xl py-12 px-4 lg:py-28">
+            <v-alert type="error">{{ error }}</v-alert>
+          </div>
+        </section>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -53,4 +71,9 @@ const { data: masterclass, error } = await useAsyncData(
 const content = computed(() =>
   masterclass ? marked(masterclass.value.content) : ""
 );
+
+const breadcrumbsItems = [
+  { title: "Inicio", to: "/" },
+  { title: "Masterclass", to: "/masterclass", disabled: false },
+];
 </script>

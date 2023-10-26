@@ -75,7 +75,7 @@ async function submit() {
   try {
     error.value = ''
     const res = await authStore.login(form.value);
-    // window.location.pathname = '/dashboard'
+    window.location.pathname = '/dashboard'
   } catch (err) {
     error.value = String(err);
   }

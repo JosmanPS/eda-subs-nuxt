@@ -6,7 +6,7 @@
       >
         <div class="flex items-center flex-shrink-0 text-white mr-6">
           <NuxtLink to="/">
-            <v-img src="eda.svg" width="150" alt="Escuela de Avivamiento" />
+            <v-img src="/eda.svg" width="150" alt="Escuela de Avivamiento" />
           </NuxtLink>
         </div>
         <div class="flex items-center w-auto">
