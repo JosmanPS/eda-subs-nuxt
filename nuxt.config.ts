@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   css: ["vuetify/lib/styles/main.sass", "~/assets/css/tailwind.css"],
 
   build: {
-    transpile: ["vuetify", ({ isDev }) => !isDev && "lodash"],
+    transpile: ["vuetify", ({ isDev }) => !isDev && "lodash", "marked"],
   },
 
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],

@@ -20,6 +20,7 @@ export const useAuthStore = defineStore("auth", {
     async login(dto: LoginDTO) {
       try {
         const data = await usersService.login(dto);
+        console.log("🚀 ~ file: auth.store.ts:23 ~ login ~ data:", data)
         const todayDate = new Date();
         const expDate = new Date();
 

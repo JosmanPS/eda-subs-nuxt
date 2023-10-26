@@ -4,14 +4,15 @@ import { Teacher } from "./teacher.entity";
 
 export interface MasterClass {
   id: string;
+  uuid: string
   title: string;
   slug: string;
-  description: ContentBlock[];
+  description: string;
   teacherId: string;
   teacher: Teacher;
   thumbnail: {
     url: string
   };
   tags: Tag[]
-  content: ContentBlock[];
+  content: string;
 }

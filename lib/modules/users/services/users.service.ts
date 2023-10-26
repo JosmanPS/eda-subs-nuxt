@@ -25,11 +25,11 @@ export class UsersService extends BaseAPI {
 
   async getLoggedUser(): Promise<GetLoggedUserResponseDTO> {
     const token = this.authService.getToken("access-token");
-    const response = await this.get("/auth/me", null, {
+    const response = await this.get("/users/me", null, {
       authorization: `Bearer ${token}`,
     });
-    const data = response.data as GetLoggedUserResponseDTO;
-    return data;
+    const data = response.data as User;
+    return { user: data };
   }
 
   async getAllUsers(): Promise<GetAllUsersResponseDTO> {

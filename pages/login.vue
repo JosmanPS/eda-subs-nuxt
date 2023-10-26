@@ -61,6 +61,10 @@
 <script setup lang="ts">
 import { useAuthStore } from "~/store/auth.store";
 
+definePageMeta({
+  middleware: 'guest'
+})
+
 const form = ref({ identifier: "", password: "" });
 const error = ref('')
 const show = ref(false);
@@ -71,7 +75,7 @@ async function submit() {
   try {
     error.value = ''
     const res = await authStore.login(form.value);
-    window.location.pathname = '/dashboard'
+    // window.location.pathname = '/dashboard'
   } catch (err) {
     error.value = String(err);
   }
