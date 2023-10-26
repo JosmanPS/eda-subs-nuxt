@@ -26,7 +26,7 @@
         </div>
         <p>{{ masterclass.description }}</p>
         <hr class="my-12" />
-        <div v-html="content" class="prose lg:prose-xl prose-slate prose-invert"></div>
+        <div v-html="content" class="prose lg:prose-xl prose-slate prose-invert mx-auto"></div>
       </div>
     </div>
   </section>
