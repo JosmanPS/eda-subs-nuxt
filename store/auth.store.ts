@@ -1,4 +1,5 @@
 import { LoginDTO } from "~~/lib/modules/users/dtos/login.dto";
+import { ResetPasswordDTO } from "~~/lib/modules/users/dtos/reset-password.dto";
 // import { RecoverPasswordDTO } from '~~/lib/modules/users/dtos/RecoverPasswordDTO'
 import { User } from "~~/lib/modules/users/entities/user.entity";
 import { authService, usersService } from "~~/lib/modules/users/services";
@@ -47,26 +48,13 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    // async getRecoverPasswordUser(recoverPasswordToken: string): Promise<User> {
-    //   const response = await userService.getRecoverPasswordUser(
-    //     recoverPasswordToken
-    //   )
-
-    //   if (response.isLeft()) {
-    //     const error = response.value
-    //     throw error
-    //   }
-
-    //   return response.value.getValue()
-    // },
-
-    // async recoverPassword(dto: RecoverPasswordDTO): Promise<void> {
-    //   const response = await userService.recoverPassword(dto)
-    //   if (response.isLeft()) {
-    //     const error = response.value
-    //     throw error
-    //   }
-    // },
+    async resetPassword(dto: ResetPasswordDTO): Promise<void> {
+      try {
+        await usersService.resetPassword(dto)
+      } catch (err: any) {
+        throw err?.response?.data?.error?.message;
+      }
+    },
 
     logout() {
       const token = useCookie("token");

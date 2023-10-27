@@ -4,6 +4,7 @@ import { GetAllUsersResponseDTO } from "../dtos/get-all-users.dto";
 import { GetLoggedUserResponseDTO } from "../dtos/get-logged-user.dto";
 import { LoginDTO, LoginResponseDTO } from "../dtos/login.dto";
 import { RegisterDTO } from "../dtos/register.dto";
+import { ResetPasswordDTO } from "../dtos/reset-password.dto";
 import { UpdateUserDTO } from "../dtos/updata-user.dto";
 import { User } from "../entities/user.entity";
 
@@ -68,5 +69,9 @@ export class UsersService extends BaseAPI {
 
   async forgotPassword(email: string): Promise<void> {
     await this.post("/auth/forgot-password", { email }, null, null);
+  }
+
+  async resetPassword(dto: ResetPasswordDTO): Promise<void> {
+    await this.post("/auth/reset-password", dto, null, null);
   }
 }
