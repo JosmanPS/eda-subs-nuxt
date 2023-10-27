@@ -38,13 +38,14 @@ export const useAuthStore = defineStore("auth", {
       }
     },
 
-    // async sendRecoverPasswordMail(email: string): Promise<void> {
-    //   const response = await usersService.sendForgotPasswordMail(email)
-    //   if (response.isLeft()) {
-    //     const error = response.value
-    //     throw error
-    //   }
-    // },
+    async sendRecoverPasswordMail(email: string): Promise<void> {
+      try {
+        await usersService.forgotPassword(email)
+      }
+      catch (err: any) {
+        throw err?.response?.data?.error?.message;
+      }
+    },
 
     // async getRecoverPasswordUser(recoverPasswordToken: string): Promise<User> {
     //   const response = await userService.getRecoverPasswordUser(

@@ -65,4 +65,8 @@ export class UsersService extends BaseAPI {
   async register(dto: RegisterDTO): Promise<void> {
     await this.post("/auth/local/register", dto, null, null);
   }
+
+  async forgotPassword(email: string): Promise<void> {
+    await this.post("/auth/forgot-password", { email }, null, null);
+  }
 }
