@@ -7,7 +7,7 @@ const devApiConfig = {
 // TODO: Verificar por qué no lee la variable env en este file.
 const prodApiConfig = {
   baseUrl:
-    process.env.API_BASE_URL || 'https://api.escueladeavivamiento.com',
+    process.env.API_BASE_URL || 'https://admin.escueladeavivamiento.com/api',
 }
 
 const apiConfig = isProduction ? prodApiConfig : devApiConfig
