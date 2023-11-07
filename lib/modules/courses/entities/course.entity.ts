@@ -1,4 +1,6 @@
+import { Lesson } from "./lesson.entity"
 import { Tag } from "./tag.entity"
+import { Teacher } from "./teacher.entity"
 
 export interface Course {
   uuid: string
@@ -10,7 +12,12 @@ export interface Course {
     url: string
   }
   tags: Tag[]
-  modules: {
-    title: string
-  }[]
+  modules: Module[]
+  teacher: Teacher
+}
+
+export interface Module {
+  title: string
+  uuid: string
+  lessons: Lesson[]
 }

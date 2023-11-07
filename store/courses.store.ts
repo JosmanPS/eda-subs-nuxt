@@ -23,5 +23,14 @@ export const useCoursesStore = defineStore("courses", {
         throw err || "Error desconocido";
       }
     },
+
+    async getBySlug(slug:string): Promise<Course> {
+      try {
+        const response = await coursesService.getBySlug(slug);
+        return response.course;
+      } catch (err: any) {
+        throw err || "Error desconocido";
+      }
+    },
   },
 });

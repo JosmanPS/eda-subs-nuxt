@@ -1,10 +1,12 @@
 <template>
   <section>
-    <div class="mx-auto z-20 w-full max-w-screen-xl py-12">
+    <div class="mx-auto container py-12 px-2">
       <v-breadcrumbs :items="breadcrumbsItems" />
       <h1 class="text-white text-4xl mb-24 font-semibold">Dashboard</h1>
 
       <MasterclassLastItems :masterclass="masterclass" :error="error" />
+
+      <CoursesLast class="mt-24" />
     </div>
   </section>
 </template>
