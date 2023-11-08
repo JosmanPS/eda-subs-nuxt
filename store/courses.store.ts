@@ -3,11 +3,13 @@ import { coursesService } from "~/lib/modules/courses/services";
 
 interface CoursesStoreState {
   coursesPreview: Course[];
+  activeCourse: Course | null;
 }
 
 export const useCoursesStore = defineStore("courses", {
   state: (): CoursesStoreState => ({
     coursesPreview: [],
+    activeCourse: null,
   }),
 
   actions: {
@@ -27,6 +29,7 @@ export const useCoursesStore = defineStore("courses", {
     async getBySlug(slug:string): Promise<Course> {
       try {
         const response = await coursesService.getBySlug(slug);
+        this.activeCourse = response.course
         return response.course;
       } catch (err: any) {
         throw err || "Error desconocido";
